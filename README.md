@@ -1,1 +1,3 @@
 # Sofa
+
+Ncurses-based Roguelike
