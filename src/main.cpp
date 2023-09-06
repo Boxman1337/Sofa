@@ -5,10 +5,9 @@
 #include <string>
 
 int main(int argC, char **argV) {
-
+	
 	// Variable declarations
 	int yMax, xMax;
-	char input; 
 
 	// Initialize and set options		
 	initscr();
@@ -22,20 +21,12 @@ int main(int argC, char **argV) {
 	WINDOW *win = newwin(yMax*3/10, xMax*8/10, yMax*7/10, xMax/10);
 	box(win, 0, 0);
 	
-	
-
 	// Print Menu titles
 	mvwprintw(win, 0, 2, "Menu");
 
 	// Main loop
 	while(true) {
-		input = wgetch(win);
-		
-		switch(input) {
-			
-			case: 
-
-		}	
+		wgetch(win);	
 	
 	}
 	
