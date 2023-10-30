@@ -10,9 +10,11 @@ CURSES_LIB_WINDOWS = -lpdcurses
 DEBUG_FLAGS = -Wall -Wextra
 
 linux:
-		rm $(OUTPUT_FILENAME_LINUX)
 		$(COMPILER) $(CPP_FILES) -o $(OUTPUT_FILENAME_LINUX) $(CURSES_LIB_LINUX)
-		./$(OUTPUT_FILENAME_LINUX)
 
 windows:
 		$(COMPILER) $(DEBUG_FLAGS) $(CPP_FILES) -o $(OUTPUT_FILENAME_WINDOWS) $(CURSES_LIB_WINDOWS)
+
+# https://stackoverflow.com/questions/32410125/valgrind-shows-memory-leaks-from-ncurses-commands-after-using-appropriate-free
+valgrind:
+		valgrind --leak-check=full ./$(OUTPUT_FILENAME_LINUX)
