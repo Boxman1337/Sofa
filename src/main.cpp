@@ -10,16 +10,24 @@
  */
 
   class GameScreen {
+    private:
+
+      int rows;
+      int columns;
+    
     public:
 
       GameScreen() {
         // Initializes curses, sets up memory and clears the screen
         initscr();
-        // Disables echo for user input
-        noecho();
-        // Disables blinking cursor
-        curs_set(0);
         getmaxyx(stdscr, rows, columns);
+        noecho();
+        curs_set(0);
+      }
+
+      ~GameScreen() {
+        // Deallocates memory and ends curses
+        endwin();
       }
 
       int getRows() {
@@ -30,13 +38,6 @@
         return this->columns;
       }
 
-      ~GameScreen() {
-        // Deallocates memory and ends curses
-        endwin();
-      }
-
-    private:
-      int rows, columns;
   };
 
 /*
