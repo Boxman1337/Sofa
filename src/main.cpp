@@ -1,38 +1,66 @@
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <curses.h>
 
-#include <string>
+/*
+ *  ------------------------
+ *      Class Declarations  
+ *  ------------------------
+ */
+
+  class GameScreen {
+    public:
+
+      GameScreen() {
+        // Initializes curses, sets up memory and clears the screen
+        initscr();
+        // Disables echo for user input
+        noecho();
+        // Disables blinking cursor
+        curs_set(0);
+        getmaxyx(stdscr, rows, columns);
+      }
+
+      int getRows() {
+        return this->rows;
+      }
+
+      int getColumns() {
+        return this->columns;
+      }
+
+      ~GameScreen() {
+        // Deallocates memory and ends curses
+        endwin();
+      }
+
+    private:
+      int rows, columns;
+  };
+
+/*
+ *  ------------------------
+ *      Main Function  
+ *  ------------------------
+ */
 
 int main(int argC, char **argV) {
-	
-	// Variable declarations
-	int yMax, xMax;
+  
+  // Creates a GameScreen object and calls the Constructor
+  GameScreen gameScreen;
 
-	// Initialize and set options		
-	initscr();
-	noecho();
-	curs_set(0);
+  // Refreshes the screen to match what is stored in memory.
+  refresh();
 
-	// Initialize variables
-	getmaxyx(stdscr, yMax, xMax); 
-	
-	// Declare Menu window
-	WINDOW *win = newwin(yMax*3/10, xMax*8/10, yMax*7/10, xMax/10);
-	box(win, 0, 0);
-	
-	// Print Menu titles
-	mvwprintw(win, 0, 2, "Menu");
+  printw("%i", gameScreen.getRows());
+  printw("%i", gameScreen.getColumns());
 
-	// Main loop
-	while(true) {
-		wgetch(win);	
-	
-	}
-	
-	endwin();
-
-	return 0;
-	
+  // Waits for user input, returns int value of key pressed.
+  getch();
+  
+  return 0;
 
 }
+
+

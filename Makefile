@@ -1,19 +1,18 @@
-# Define Compiler
-CC = g++
+COMPILER = g++
+CPP_FILES = ./src/main.cpp
 
-# Compiler Flags
-CFLAGS = -g -Wall -lncurses
+OUTPUT_FILENAME_LINUX = sofa.bin
+CURSES_LIB_LINUX = -lncurses
 
-# Build target executable
-SRC = src
-INCLUDES = include
-TARGET = main
+OUTPUT_FILENAME_WINDOWS = sofa.exe
+CURSES_LIB_WINDOWS = -lpdcurses
 
-all: $(TARGET)
+DEBUG_FLAGS = -Wall -Wextra
 
-$(TARGET): $(SRC)/$(TARGET).cpp
-	$(CC) $(CFLAGS) -I $(INCLUDES) -o $@ $^
+linux:
+		rm $(OUTPUT_FILENAME_LINUX)
+		$(COMPILER) $(CPP_FILES) -o $(OUTPUT_FILENAME_LINUX) $(CURSES_LIB_LINUX)
+		./$(OUTPUT_FILENAME_LINUX)
 
-
-
-
+windows:
+		$(COMPILER) $(DEBUG_FLAGS) $(CPP_FILES) -o $(OUTPUT_FILENAME_WINDOWS) $(CURSES_LIB_WINDOWS)
